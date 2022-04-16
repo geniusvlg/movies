@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package com.fact.nash.proto.general;
+option java_package = "com.fact.nash.proto.general";
+option java_multiple_files = true;
+
+
+import "core/DhPaginationV1.proto";
+
+message DhDataRequestV1
+{
+    message Option  {
+      string key = 1;
+      string value = 2;
+    }
+
+    enum DateResolution {
+      NONE = 0;
+      FEELBACK = 1;
+    }
+
+    enum IdType {
+      LOCAL = 0;
+      PERMID = 1;
+    }
+
+  // dbpath is the path to a database expressed as an auds path. For example:
+  // - /c/CLIENT/PATH/DB.OFDB 
+  // - SP_DB:SP_CONST.FDB 
+  // It can also be used as an arbitrary identifier such as a benchmark id. 
+  string dbpath = 1;
+
+  // list of identifiers to query, can be empty for a column/rotate fetch 
+  // can also specify mutliple query params: "id" 
+  repeated string ids = 2;
+
+  // a list of fields to query (e.g. PRICE), repeated query param "field" 
+  repeated string fields = 3;
+
+  // list of dates to query (repeated query param "date") 
+  repeated uint32 dates = 4 [packed = true];
+
+  // alternatively can specify a start/end dates and a frequency in YYYYMMDD 
+  uint32 sdate = 5;
+
+  // query param: "sdate" 
+  uint32 edate = 6;
+
+  // query param: "edate"  
+  // defaults to no date resolution 
+  DateResolution date_resolution = 7;
+
+  // Optional arguments 
+  repeated Option options = 8;
+  IdType id_type = 9;
+  com.fact.nash.proto.core.DhPaginationRequestV1 pagination = 10;
+
+  // Unique identifier of the version being requested. 
+  // If left blank the most recent version will be supplied. 
+  string version_identifier = 11;
+
+}

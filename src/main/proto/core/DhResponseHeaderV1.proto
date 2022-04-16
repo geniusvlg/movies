@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package com.fact.nash.proto.core;
+option java_package = "com.fact.nash.proto.core";
+option java_multiple_files = true;
+
+message DhResponseHeaderV1
+{
+  // This error is associated to the entire response, not just a column
+  sint32 error = 1;
+  string error_description = 2;
+  fixed64 dbHashTime = 4;
+  // if the request doesn't include ids, they are returned here, otherwise
+  // the DataVector will be aligned to the requested identifier list.
+  repeated string ids = 3;
+}

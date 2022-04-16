@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.fact.nash.proto.core;
+option java_package = "com.fact.nash.proto.core";
+option java_multiple_files = true;
+
+message DhAttributeV1
+{
+  string key = 1;
+  string value = 2;
+}

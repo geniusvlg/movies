@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package com.fact.nash.proto.general;
+option java_package = "com.fact.nash.proto.general";
+
+message Error
+{
+  /**
+   * Error number describing the exact error. These should be listed in your
+   * service's documentation. Numbers 1 - 999 are reserved for standardized,
+   * FactSet-wide error messages. Use numbers greater than 999 for
+   * application-specific errors.
+   */
+  uint32 code = 1;
+
+  /**
+   * A human-readable message describing the error. Include details to assist
+   * the user in isolating and resolving the error such as relevant database or
+   * field names, links to documentation, or settings to check.
+   */
+  string message = 2;
+
+}

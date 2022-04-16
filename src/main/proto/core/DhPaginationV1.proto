@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package com.fact.nash.proto.core;
+option java_package = "com.fact.nash.proto.core";
+option java_outer_classname = "DhPagination";
+option java_multiple_files = true;
+
+message DhPaginationRequestV1
+{
+  // Maximum number of entries to return. Valid for offset-based and cursor-based pagination strategies.
+  uint32 limit = 1;
+  // Starting point for cursor-based pagination. All entries before this position are skipped.
+  // Valid only if the pagination strategy is cursor-based.
+  string cursor = 2;
+  // Number of entries to skip. Valid only if the pagination strategy is offset-based.
+  uint32 offset = 3;
+}
+
+message DhPaginationResponseV1
+{
+  // Total number of entries in the result set.
+  uint32 total = 1;
+  // Flag indicating that the value of total is estimated.
+  bool is_estimated_total = 2;
+  // The next cursor position to use in the parameter pagination.cursor for an endpoint request that
+  // supports cursor-based pagination, otherwise empty string.
+  string next = 3;
+  // The previous cursor position to use in the parameter pagination.cursor for an endpoint that supports cursor-based pagination.
+  // If a previous cursor position is not supported or available, previous MUST be empty string
+  string previous = 4;
+}

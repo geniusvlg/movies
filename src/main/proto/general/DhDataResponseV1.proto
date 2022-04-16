@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package com.fact.nash.proto.general;
+option java_package = "com.fact.nash.proto.general";
+option java_multiple_files = true;
+
+import "core/DhAttributeV1.proto";
+import "core/DhDataColumnV1.proto";
+import "core/DhPaginationV1.proto";
+import "core/DhResponseHeaderV1.proto";
+
+/**
+ * A DhDataResponseV1 is the return value of a DhDataRequestV1
+ */
+message DhDataResponseV1
+{
+
+  com.fact.nash.proto.core.DhResponseHeaderV1 header = 1;
+
+  // columns will be aligned either to the requested id's, or the number of
+  // requested fields*dates, field major order. It depends on the request.
+  repeated com.fact.nash.proto.core.DhDataColumnV1 columns = 2;
+
+  // Additional attributes
+  repeated com.fact.nash.proto.core.DhAttributeV1 attributes = 3;
+
+  com.fact.nash.proto.core.DhPaginationResponseV1 pagination = 4;
+
+  // Unique identifier of the data version being returned.
+  string version_identifier = 5;
+
+
+}

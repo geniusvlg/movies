@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package com.fact.nash.proto.core;
+option java_package = "com.fact.nash.proto.core";
+option java_multiple_files = true;
+
+import "core/DhDataVectorVariantV1.proto";
+
+// A DataColumn is basically the same as a DataVector with some meta data
+
+message DhDataColumnV1
+{
+  // field name
+  string field = 1;
+  // the actual date in the database
+  uint32 date = 2;
+  // error code and description (0 on success)
+  sint32 error = 3;
+  string error_description = 4;
+  // if unchanged is true, the data is the same as the prior column
+  bool unchanged = 5;
+  // a hash of the data associated with the column
+  fixed32 crc32 = 7;
+  // The actual data in the column (which is a variant vector).  See:
+  // fds_data_vector.proto
+  com.fact.nash.proto.core.DhDataVectorVariantV1 data = 6;
+  // date requested
+  uint32 requested_date = 8;
+}

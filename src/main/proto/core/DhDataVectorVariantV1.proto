@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package com.fact.nash.proto.core;
+option java_package = "com.fact.nash.proto.core";
+option java_multiple_files = true;
+
+message DhDataVectorVariantV1
+{
+  enum Type {
+    NONE    = 0;
+    BOOL    = 2;
+    INT32   = 4;
+    UINT32  = 5;
+    FLOAT   = 6;
+    INT64   = 7;
+    UINT64  = 8;
+    DOUBLE  = 9;
+    STRING  = 10;
+    VECTOR  = 12;
+  }
+
+  Type type = 1;
+
+  repeated bool   bool_value   = 2;
+  repeated sint32 int32_value  = 4;
+  repeated uint32 uint32_value = 5;
+  repeated float  float_value  = 6;
+  repeated sint64 int64_value  = 7;
+  repeated uint64 uint64_value = 8;
+  repeated double double_value = 9;
+  repeated string string_value = 10 [packed=false];
+  repeated DhDataVectorVariantV1 vector_value = 12;
+}

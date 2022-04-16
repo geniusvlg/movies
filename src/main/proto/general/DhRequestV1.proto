@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package com.fact.nash.proto.general;
+option java_package = "com.fact.nash.proto.general";
+option java_multiple_files = true;
+
+message DhDatahubStructuredCoreV1
+{
+
+  // a location where the data to be queried for can be found [Required]
+  string data_path = 1;
+
+  // a list of symbols to query data for [Required]
+  repeated string symbols = 2;
+
+  // a list of fields to query (e.g. price, cusip, isin, etc.)  [Required]
+  repeated string fields = 3;
+
+  // a GUID representing the entire request [Required] 
+  string datahub_request_guid = 4;
+
+  // the time when the request was made [Required]
+  uint64 request_time = 5;
+}
+
+// Typically set by the consumer (FQL, Screening) - All Optional
+message DhDataPreferencesV1 {
+
+  enum zero_date_type {
+    LEGACY      = 0;
+    AMERICAS    = 1;
+    EUROPE      = 2;
+    ASIAPACIFIC = 3;
+  }
+
+  // flag to enforce sourceLinking 
+  bool source_linking = 1;
+
+  // Use localized zero date of the symbols exchange
+  bool local_zero_date = 3;
+
+  // user language preference (e.g. ENG)
+  string language = 4;
+
+  // the calendar type that should be used for data requests
+  string calendar = 5;
+
+}
+
+// typically set by someone calling an FQL/SCR code - All Optional
+message DhCoreParametersV1 {
+
+  // a list of dates to return [Optional]
+  repeated uint32 date_list = 1;
+
+  // a start/end date to be used by the query (YYYYMMDD) [Optional]
+  uint32 start_date = 2;
+  uint32 end_date = 3;
+
+  // a reporting frequency to be used by the query (e.g. ANN, QTR, etc.) [Optional]
+  string frequency = 4;
+
+  // a currency to be used by the query (e.g. USD, GBP, etc.) [Optional]
+  string currency = 5;
+
+}
+
+// the default message that will be used if a service owner doesn't provide one
+message DhRequestDefaultV1{
+  DhDatahubStructuredCoreV1 core = 1;
+  DhDataPreferencesV1 dp = 2;
+  DhCoreParametersV1 cp = 3;
+}
