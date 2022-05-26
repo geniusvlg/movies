@@ -1,4 +1,4 @@
-package com.fact.nash.persistance.repository;
+package com.fact.nash.V1.repository;
 
 import com.fact.nash.persistance.entity.Movie.Movie;
 import com.fact.nash.projection.view.MovieV1View;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, Integer> {
+public interface MovieRepositoryV1 extends JpaRepository<Movie, Integer> {
 
     @Modifying
     @Query(
@@ -47,5 +47,4 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     )
     List<MovieV1View> fetchMoviesByYear(int regionId, int year, int limit);
 
-    List<String> findByMovieName(String movieName);
 }

@@ -1,6 +1,6 @@
 package com.fact.nash.V1.controller;
 
-import com.fact.nash.V1.processor.IsOnProcessor;
+import com.fact.nash.V1.serializer.DhIsOnSerializer;
 import com.fact.nash.V1.service.IsOnService;
 import com.fact.nash.exceptions.BaseException;
 import com.fact.nash.exceptions.DatahubRequestMissingRequiredParameterException;
@@ -11,17 +11,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/is-on/check")
+@PreAuthorize("hasAuthority('SCOPE_nash-resource/read')")
 public class IsOnController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private IsOnProcessor isOnProcessor = new IsOnProcessor();
+    private DhIsOnSerializer dhIsOnSerializer = new DhIsOnSerializer();
 
     @Autowired
     private IsOnService isOnService;
@@ -33,7 +35,7 @@ public class IsOnController {
         }
 
         List<CompanyDto> companyDTOList = isOnService.findCompaniesByEntityId(companyId);
-        DhDataResponseV1 responseV1 = isOnProcessor.parseToDatahubResponse(companyId, companyDTOList);
+        DhDataResponseV1 responseV1 = dhIsOnSerializer.parseToDatahubResponse(companyId, companyDTOList);
 
         JsonFormat jsonFormat = new JsonFormat();
         String jsonString = "";

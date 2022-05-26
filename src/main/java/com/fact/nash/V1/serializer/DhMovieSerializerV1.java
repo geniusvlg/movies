@@ -1,4 +1,4 @@
-package com.fact.nash.V1.processor;
+package com.fact.nash.V1.serializer;
 
 import com.fact.nash.projection.dto.MovieV1Dto;
 import com.fact.nash.proto.core.DhDataColumnV1;
@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
-public class MovieProcessor {
+public class DhMovieSerializerV1 {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
@@ -80,6 +80,7 @@ public class MovieProcessor {
                         }
                         vector.addVectorValue(vectorValue);
                     }
+
                     column.setData(vector);
                 }
 

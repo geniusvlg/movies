@@ -1,4 +1,4 @@
-package com.fact.nash.persistance.repository;
+package com.fact.nash.V1.repository;
 
 import com.fact.nash.persistance.entity.WhitelistedCompanies.WhitelistedCompanies;
 import org.springframework.data.jpa.repository.Modifying;

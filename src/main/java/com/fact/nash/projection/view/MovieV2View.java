@@ -1,28 +1,38 @@
 package com.fact.nash.projection.view;
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 
 public interface MovieV2View {
 
-    String getMovieName();
+    Long getMovieVendorId();
 
-    Double getProdBudget();
+    String getTitle();
 
-    long getMovieOdid();
+    String getDomesticDistributor();
+
+    Data getDomesticReleaseDate();
 
     String getVideoReleaseType();
 
-    Long getTheaterCount();
+    Long getTotalBoxOffice();
 
-    String getDistributorName();
+    Long getTicketSold();
+
+    Long getYearEndTotal();
+
+    Date getYear();
+
+    Double getTheaterCount();
 
     String getCompanyName();
 
-    Double getBoxOffice();
+    String getDistributorName();
 
-    Double getGrossIncomeLocal();
+    String getInternetPlatformName();
 
-    Date getReleaseDate();
+    String getInternetReleaseDate();
 
-    Date getInternetReleaseDate();
+    String getInternetPlatformsInternetReleasedBy();
+
 }

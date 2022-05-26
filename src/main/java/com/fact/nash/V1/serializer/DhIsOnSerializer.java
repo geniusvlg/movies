@@ -1,4 +1,4 @@
-package com.fact.nash.V1.processor;
+package com.fact.nash.V1.serializer;
 
 import com.fact.nash.projection.dto.CompanyDto;
 import com.fact.nash.proto.core.DhDataColumnV1;
@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class IsOnProcessor {
+public class DhIsOnSerializer {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 

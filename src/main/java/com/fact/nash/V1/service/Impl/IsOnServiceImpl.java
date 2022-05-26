@@ -5,7 +5,7 @@ import com.fact.nash.persistance.entity.WhitelistedCompanies.WhitelistedCompanie
 import com.fact.nash.projection.dto.CompanyDto;
 import com.fact.nash.V1.service.IsOnService;
 import com.fact.nash.exceptions.DatahubRequestMissingRequiredParameterException;
-import com.fact.nash.persistance.repository.WhitelistedCompaniesRepository;
+import com.fact.nash.V1.repository.WhitelistedCompaniesRepository;
 import com.fact.nash.validator.RequestValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,16 +27,16 @@ public class IsOnServiceImpl implements IsOnService {
     private WhitelistedCompaniesRepository whitelistedCompaniesRepository;
 
     @Autowired
-    RequestValidator requestValidator;
+    private RequestValidator requestValidator;
 
     @Override
     public List<CompanyDto> findCompaniesByEntityId(String ids) throws DatahubRequestMissingRequiredParameterException {
 
-        requestValidator.validateIsOnRequest(ids);
+        this.requestValidator.validateIsOnRequest(ids);
         List<String> idArrays = Arrays.asList(ids.split(","));
         List<WhitelistedCompanies> companies = whitelistedCompaniesRepository.findByRawTickers(idArrays);
 
-        return this.companyMapper.convertToDtos(companies);
+        return this.companyMapper.convertEntitiesToDtos(companies);
     }
 
 }

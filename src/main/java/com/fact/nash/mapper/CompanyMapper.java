@@ -15,15 +15,15 @@ public abstract class CompanyMapper {
 
     public abstract WhitelistedCompanies convertToEntity(CompanyDto companyDto);
 
-    public abstract CompanyDto convertToDto(WhitelistedCompanies whitelistedCompanies);
+    public abstract CompanyDto convertEntityToDto(WhitelistedCompanies whitelistedCompanies);
 
-    public List<CompanyDto> convertToDtos(final List<WhitelistedCompanies> whitelistedCompaniesList) {
+    public List<CompanyDto> convertEntitiesToDtos(final List<WhitelistedCompanies> whitelistedCompaniesList) {
         if (whitelistedCompaniesList == null)
             return null;
 
         final List<CompanyDto> list = new ArrayList<CompanyDto>(whitelistedCompaniesList.size());
         for (final WhitelistedCompanies whitelistedCompany: whitelistedCompaniesList) {
-            list.add(this.convertToDto(whitelistedCompany));
+            list.add(this.convertEntityToDto(whitelistedCompany));
         }
 
         return list;
